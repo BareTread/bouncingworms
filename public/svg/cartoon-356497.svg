@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="34.923mm" height="36.59mm" clip-rule="evenodd" fill-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" version="1.0" viewBox="0 0 1686 1767">
+ <defs>
+  <style type="text/css">
+    .fil8 {fill:none}
+    .fil11 {fill:black}
+    .fil7 {fill:#993467}
+    .fil10 {fill:white}
+    .fil12 {fill:white;fill-opacity:0.219608}
+    .fil9 {fill:url(#i)}
+    .fil1 {fill:url(#b)}
+    .fil3 {fill:url(#j)}
+    .fil5 {fill:url(#k)}
+    .fil6 {fill:url(#a)}
+    .fil0 {fill:url(#l)}
+    .fil2 {fill:url(#m)}
+    .fil4 {fill:url(#n)}
+  </style>
+  <linearGradient id="i" x1="1170.4" x2="1166.6" y1="328.11" y2="650.49" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#f9c" offset="0"/>
+   <stop stop-color="hotpink" offset="1"/>
+  </linearGradient>
+  <linearGradient id="b" x1="302.38" x2="527.66" y1="1567.5" y2="1517.5" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#f9c" offset="0"/>
+   <stop stop-color="#F272B2" offset="1"/>
+  </linearGradient>
+  <linearGradient id="j" x1="592.51" x2="795.14" y1="1476" y2="1359.7" gradientUnits="userSpaceOnUse" xlink:href="#b">
+  </linearGradient>
+  <linearGradient id="k" x1="42.067%" x2="57.933%" y1="61.951%" y2="38.049%" xlink:href="#b">
+  </linearGradient>
+  <linearGradient id="a" x1="49.748%" x2="50.252%" y1="57.33%" y2="42.67%">
+   <stop stop-color="#f9c" offset="0"/>
+   <stop stop-color="#FA87C1" offset="1"/>
+  </linearGradient>
+  <linearGradient id="l" x1="343.67" x2="500.02" y1="1344.1" y2="1370.2" gradientUnits="userSpaceOnUse" xlink:href="#a">
+  </linearGradient>
+  <linearGradient id="m" x1="518.35" x2="608.25" y1="1573.6" y2="1471.9" gradientUnits="userSpaceOnUse" xlink:href="#a">
+  </linearGradient>
+  <linearGradient id="n" x1="803.07" x2="855.85" y1="1413.8" y2="1295.8" gradientUnits="userSpaceOnUse" xlink:href="#a">
+  </linearGradient>
+ </defs>
+   <path class="fil0" d="m802 1077c117-180-12 496-111 618-100 122-323 45-449-57-125-103-317-515-211-418 54 49 362-6 489-37 121-30 226-19 282-106z"/>
+    <path class="fil1" d="m719 1257c126 102 147 284 48 406-100 122-282 139-408 37-125-102-146-284-47-406 100-123 282-139 407-37z"/>
+    <path class="fil2" d="m848 1184c126 102 147 284 48 406-100 122-282 139-408 36-125-102-146-283-47-406 100-122 282-138 407-36z"/>
+    <path class="fil3" d="m899 1055c150 60 225 227 166 373-58 147-227 217-377 157-151-60-225-228-167-374 59-146 228-216 378-156z"/>
+    <path class="fil4" d="m1e3 946c151 60 225 227 167 374-59 146-228 216-378 156s-225-227-166-373c58-147 227-217 377-157z"/>
+    <ellipse class="fil5" cx="973" cy="1113" rx="293" ry="285"/>
+    <ellipse class="fil6" cx="1026" cy="975" rx="293" ry="285"/>
+    <ellipse class="fil5" cx="1073" cy="859" rx="293" ry="285"/>
+    <ellipse class="fil6" cx="1126" cy="721" rx="293" ry="285"/>
+    <path class="fil7" d="m966 281c-8-224-168-194-367-188 215-40 389-65 408 188h-41z"/>
+   <path class="fil8" d="m987 281c0-234-204-215-388-188"/>
+    <path class="fil7" d="m1342 193c50-109 186-214 296-135-121-23-212 30-256 146l-40-11z"/>
+   <path class="fil8" d="m1362 199c24-87 162-202 276-141"/>
+    <path class="fil7" d="m1591 28c-1-39 20-32 40-11 14-10 27-9 24 17 31 9 48 25 8 46-1 10-8 15-24 10-2 1-4 2-7 3-46 16-52-3-42-26-36-24-25-36 1-39z"/>
+   <path class="fil8" d="m1614 52c-23-86 84 56-6 5-68-37 109-25 37 15-104 58 6-118-1-20-1 21-49 30-30-11"/>
+    <path class="fil7" d="m652 49c12-3 14 2 10 11 5 8 9 17 9 25 14 17 4 27-13 32-3 3-7 6-12 9-19 9-31 4-38-8h-3c-26 17-49 20-42-20 14-76 62-74 89-49zm-19 51zm2 1z"/>
+   <path class="fil8" d="m605 93c100-63-72 68-10-16 67-92 71 80 23 27-43-47 103-21 17 11-52 19-26-35 0-33"/>
+   <ellipse class="fil9" cx="1169" cy="489" rx="381" ry="361"/>
+   <ellipse class="fil10" cx="1019" cy="451" rx="61" ry="123"/>
+   <ellipse class="fil10" cx="1269" cy="451" rx="61" ry="123"/>
+   <circle class="fil11" cx="1019" cy="451" r="38"/>
+     <path class="fil7" d="m1044 696c66-138 191 50 259-86 25 139-188 17-221 101l-38-15z"/>
+    <path class="fil8" d="m1063 703c42-111 227 49 240-93"/>
+    <circle class="fil11" cx="1269" cy="451" r="38"/>
+   <path class="fil12" d="m1023 823c-138-54-236-183-236-334 0-171 126-314 295-351-97 83-213 201-213 338s92 265 154 347z"/>
+</svg>
