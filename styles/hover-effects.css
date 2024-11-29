@@ -1,0 +1,35 @@
+.artwork-hover {
+  transition: all 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.artwork-hover:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+}
+
+.hover-info {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease-in-out;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.artwork-hover:hover .hover-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.worm-bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}

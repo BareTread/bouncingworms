@@ -67,10 +67,10 @@ const WormSVGs = {
   default: '/svg/worm-305388.svg'
 };
 
-const generateWormShape = (category: string, world: World, isMoving: boolean, shouldShuffle: boolean) => {
-  const color = getShapeColor(category, world);
+const generateWormShape = (piece: ArtPiece, world: World, isMoving: boolean, shouldShuffle: boolean) => {
+  const color = getShapeColor(piece.category, world);
   const glowColor = color.replace(')', ', 0.3)').replace('rgba', 'rgb');
-  const svgPath = WormSVGs[category as keyof typeof WormSVGs] || WormSVGs.default;
+  const svgPath = WormSVGs[piece.category as keyof typeof WormSVGs] || WormSVGs.default;
 
   // Base pulsating animation (always active)
   const pulseAnimation = {
@@ -149,35 +149,25 @@ const generateWormShape = (category: string, world: World, isMoving: boolean, sh
     >
       {/* Preview on hover */}
       <div 
-        className="absolute -top-32 left-1/2 transform -translate-x-1/2 bg-black/90 p-3 rounded-xl shadow-2xl
-                   opacity-0 group-hover:opacity-100 transition-all duration-200 z-50 pointer-events-none
-                   border-2 border-[#2a2a2a] backdrop-blur-sm"
+        className="absolute -top-32 left-1/2 transform -translate-x-1/2 bg-black/80 p-3 rounded-xl shadow-2xl
+                  opacity-0 group-hover:opacity-100 transition-all duration-200 z-50 pointer-events-none
+                  border border-white/20 backdrop-blur-sm"
         style={{ 
           width: '250px',
           height: '180px',
           transformOrigin: 'bottom center',
         }}
       >
-        <div className="text-white text-sm mb-2 font-medium capitalize text-center">{category}</div>
-        <motion.div 
-          className="w-full h-[140px] flex items-center justify-center"
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [-5, 5, -5, 5, -5],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <img 
-            src={svgPath} 
-            alt={category}
-            className="w-[80%] h-[80%] object-contain"
-            style={{ filter: `hue-rotate(${getHueRotation(color)})` }} 
+        <div className="text-white text-sm mb-2 font-medium capitalize text-center">{piece.title}</div>
+        <div className="relative w-full h-[140px]">
+          <Image
+            src={piece.path}
+            alt={piece.title}
+            fill
+            className="object-contain rounded-lg"
+            sizes="250px"
           />
-        </motion.div>
+        </div>
       </div>
 
       {/* Glow effect */}
@@ -196,32 +186,22 @@ const generateWormShape = (category: string, world: World, isMoving: boolean, sh
       >
         <img 
           src={svgPath} 
-          alt="" 
+          alt={piece.category} 
           className="w-full h-full" 
           style={{ filter: `hue-rotate(${getHueRotation(color)})` }} 
         />
       </motion.div>
 
       {/* Main SVG */}
-      <motion.div 
-        className="absolute inset-0"
-        animate={{
-          rotate: [-2, 2, -2],
-          scale: [1, 1.05, 1],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        <img 
-          src={svgPath} 
-          alt={category} 
-          className="w-full h-full" 
-          style={{ filter: `hue-rotate(${getHueRotation(color)})` }} 
-        />
-      </motion.div>
+      <img 
+        src={svgPath} 
+        alt={piece.category}
+        className="w-full h-full relative z-10 drop-shadow-md" 
+        style={{ 
+          filter: `drop-shadow(0 2px 3px rgba(0,0,0,0.2)) hue-rotate(${getHueRotation(color)})`,
+          opacity: world === 'day' ? 0.85 : 1
+        }} 
+      />
     </motion.div>
   );
 };
@@ -259,7 +239,7 @@ const renderShape = (piece: ArtPiece, world: World, isMoving: boolean, shouldShu
         times: [0, 0.5, 1]
       }}
     >
-      {generateWormShape(piece.category, world, isMoving, shouldShuffle)}
+      {generateWormShape(piece, world, isMoving, shouldShuffle)}
     </motion.div>
   );
 };
@@ -291,7 +271,7 @@ const EnhancedPortfolio = () => {
   const getBackgroundStyle = (world: typeof currentWorld) => {
     switch (world) {
       case 'day':
-        return 'bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-50 via-gray-100 to-slate-200';
+        return 'bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100 via-gray-50 to-white';
       case 'night':
         return 'bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-gray-900 to-slate-950';
       case 'dream':
@@ -456,9 +436,13 @@ const EnhancedPortfolio = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white/10 backdrop-blur-md rounded-xl p-3 shadow-lg"
+          className={`${
+            currentWorld === 'day' 
+              ? 'bg-white/40 text-gray-600' 
+              : 'bg-black/20 text-white/80'
+          } backdrop-blur-sm rounded-full px-6 py-2.5 shadow-sm`}
         >
-          <p className="text-white/90 text-sm">
+          <p className="text-sm">
             Welcome! Tap the shapes to explore my work
           </p>
         </motion.div>
@@ -568,8 +552,7 @@ const EnhancedPortfolio = () => {
               transition-all duration-300 backdrop-blur-sm
               ${activeCategory === category.id ? 
                 getCategoryStyle(category.id) + ' shadow-lg ring-1 ring-white/20' : 
-                'bg-white/10 hover:bg-white/20'}
-              group relative`}
+                'bg-white/10 hover:bg-white/20'}`}
             whileHover={{ scale: 1.1, x: 5 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setActiveCategory(category.id === activeCategory ? null : category.id)}
@@ -589,42 +572,52 @@ const EnhancedPortfolio = () => {
       <AnimatePresence>
         {selectedPiece && (
           <motion.div
-            className="fixed inset-0 bg-black/80 flex items-center justify-center p-8 z-50"
+            className={`fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-8 z-50 ${
+              currentWorld === 'night' ? 'bg-blue-900/60' : 
+              currentWorld === 'dream' ? 'bg-purple-900/60' : 
+              'bg-black/60'
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedPiece(null)}
           >
             <motion.div
-              className="bg-white rounded-2xl p-8 max-w-4xl w-full"
+              className={`relative backdrop-blur-md rounded-2xl p-8 max-w-4xl w-full shadow-2xl border border-white/10 ${
+                currentWorld === 'night' ? 'bg-blue-950/80' : 
+                currentWorld === 'dream' ? 'bg-purple-950/80' : 
+                'bg-black/80'
+              }`}
               initial={{ scale: 0.8, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.8, y: 50 }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="relative aspect-square w-full mb-6">
+              <div className="relative aspect-video w-full rounded-lg overflow-hidden mb-4">
                 <Image
                   src={selectedPiece.path}
                   alt={selectedPiece.title}
                   fill
-                  className="object-contain rounded-lg"
-                  unoptimized
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
-              <h2 className="text-3xl font-bold text-black mb-4">{selectedPiece.title}</h2>
-              <div className="flex items-center space-x-4 mb-6">
-                <span className="px-4 py-2 bg-gray-100 rounded-full text-sm capitalize">
-                  {selectedPiece.category}
-                </span>
-                <span className="px-4 py-2 bg-gray-100 rounded-full text-sm capitalize">
-                  {selectedPiece.size}
-                </span>
-              </div>
-              <p className="text-gray-600 leading-relaxed">
-                This stunning piece showcases the artist's unique style and creative vision. 
-                The composition draws viewers in while the technical execution demonstrates 
-                masterful control of the medium.
-              </p>
+              <h2 className={`text-2xl font-bold mb-2 ${
+                currentWorld === 'night' ? 'text-blue-200' : 
+                currentWorld === 'dream' ? 'text-purple-200' : 
+                'text-white'
+              }`}>
+                {selectedPiece.title}
+              </h2>
+              <p className="text-white/60">{selectedPiece.category}</p>
+              
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedPiece(null)}
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                <Eye className="w-6 h-6 text-white/60" />
+              </button>
             </motion.div>
           </motion.div>
         )}
