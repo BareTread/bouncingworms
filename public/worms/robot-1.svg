@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="robotGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#718096"/>
+      <stop offset="100%" style="stop-color:#4A5568"/>
+    </linearGradient>
+    <pattern id="circuit" patternUnits="userSpaceOnUse" width="20" height="20">
+      <path d="M0,10 h5 m10,0 h5 M10,0 v5 m0,10 v5" stroke="rgba(255,255,255,0.2)" fill="none"/>
+    </pattern>
+  </defs>
+  <g transform="translate(10,25)">
+    <!-- Robot head with antenna -->
+    <path d="M10,0 L15,5 L15,15 L5,15 L5,5 Z" fill="url(#robotGrad1)"/>
+    <line x1="10" y1="0" x2="10" y2="-5" stroke="url(#robotGrad1)" stroke-width="2">
+      <animate attributeName="y2" values="-5;-8;-5" dur="1s" repeatCount="indefinite"/>
+    </line>
+    <!-- Robot body segments with mechanical joints -->
+    <g fill="url(#robotGrad1)">
+      <rect x="7" y="15" width="6" height="10" rx="1"/>
+      <circle cx="10" cy="25" r="2"/>
+      <rect x="5" y="25" width="10" height="12" rx="1"/>
+      <circle cx="10" cy="37" r="2"/>
+      <rect x="8" y="37" width="4" height="15" rx="1"/>
+    </g>
+    <!-- Circuit pattern overlay -->
+    <rect x="5" y="15" width="10" height="37" fill="url(#circuit)" opacity="0.5"/>
+  </g>
+</svg> 

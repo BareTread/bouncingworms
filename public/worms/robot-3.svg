@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="robotGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CBD5E0"/>
+      <stop offset="100%" style="stop-color:#A0AEC0"/>
+    </linearGradient>
+    <pattern id="circuit3" patternUnits="userSpaceOnUse" width="10" height="10">
+      <path d="M0,5 h2 m6,0 h2 M5,0 v2 m0,6 v2" stroke="rgba(255,255,255,0.4)" fill="none"/>
+      <circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.4)"/>
+    </pattern>
+  </defs>
+  <g transform="translate(15,25)">
+    <!-- Tech head with scanning light -->
+    <rect x="5" y="0" width="12" height="12" rx="3" fill="url(#robotGrad3)"/>
+    <line x1="11" y1="0" x2="11" y2="12" stroke="rgba(255,255,255,0.4)" stroke-width="0.5">
+      <animate attributeName="x1" values="5;17;5" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="x2" values="5;17;5" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
+    </line>
+    <!-- Tech body with data flow -->
+    <g>
+      <rect x="7" y="12" width="8" height="15" rx="1" fill="url(#robotGrad3)"/>
+      <rect x="7" y="12" width="8" height="15" fill="url(#circuit3)">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="1.5s" repeatCount="indefinite"/>
+      </rect>
+      <!-- Data pulse effect -->
+      <rect x="7" y="12" width="8" height="2" fill="rgba(255,255,255,0.4)">
+        <animate attributeName="y" values="12;27;12" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <!-- Tech tail with pulsing end -->
+    <g>
+      <rect x="9" y="27" width="4" height="10" rx="1" fill="url(#robotGrad3)"/>
+      <circle cx="11" cy="37" r="2" fill="url(#robotGrad3)">
+        <animate attributeName="r" values="2;2.5;2" dur="1s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;0.8;1" dur="1s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+</svg> 

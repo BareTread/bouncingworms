@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="objectGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F6AD55"/>
+      <stop offset="100%" style="stop-color:#ED8936"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10,20)">
+    <!-- Cube head -->
+    <path d="M10,0 L20,5 L20,15 L10,20 L0,15 L0,5 Z" fill="url(#objectGrad2)">
+      <animate attributeName="d" 
+        values="M10,0 L20,5 L20,15 L10,20 L0,15 L0,5 Z;
+                M10,2 L22,7 L22,17 L10,22 L-2,17 L-2,7 Z;
+                M10,0 L20,5 L20,15 L10,20 L0,15 L0,5 Z"
+        dur="2s" repeatCount="indefinite"/>
+    </path>
+    <!-- Body segments - Connected cubes -->
+    <g>
+      <path d="M8,20 L16,24 L16,32 L8,36 L0,32 L0,24 Z" fill="url(#objectGrad2)"/>
+      <path d="M12,36 L20,40 L20,48 L12,52 L4,48 L4,40 Z" fill="url(#objectGrad2)">
+        <animate attributeName="d" 
+          values="M12,36 L20,40 L20,48 L12,52 L4,48 L4,40 Z;
+                  M12,34 L22,38 L22,46 L12,50 L2,46 L2,38 Z;
+                  M12,36 L20,40 L20,48 L12,52 L4,48 L4,40 Z"
+          dur="1.5s" repeatCount="indefinite"/>
+      </path>
+    </g>
+  </g>
+</svg> 
