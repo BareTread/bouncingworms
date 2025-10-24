@@ -1,12 +1,9 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Artist Portfolio',
-  description: 'Interactive Artist Portfolio',
+  title: 'Bouncing Worms Portfolio',
+  description: 'Interactive portfolio experience with animated worm characters representing unique artworks',
 }
 
 export default function RootLayout({
@@ -16,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen`}>{children}</body>
+      <body className="min-h-screen antialiased">{children}</body>
     </html>
   )
 }
