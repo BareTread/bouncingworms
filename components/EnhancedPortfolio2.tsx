@@ -289,6 +289,24 @@ const EnhancedPortfolio = () => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isLoading, setIsLoading] = useState(true);
 
+  // Memoize initial positions to prevent recalculation on re-renders
+  const initialPositions = useMemo(() => {
+    const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1000;
+    const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 1000;
+    const margin = windowWidth < 768 ? 60 : 120;
+
+    return artworks.map(() => ({
+      x: margin + Math.random() * (windowWidth - margin * 2),
+      y: margin + Math.random() * (windowHeight - margin * 2),
+      rotate: Math.random() * 360
+    }));
+  }, []);
+
+  const filteredArtworks = useMemo(() => {
+    if (activeCategory === 'all') return artworks;
+    return artworks.filter(piece => piece.category === activeCategory);
+  }, [activeCategory]);
+
   useEffect(() => {
     setMounted(true);
     // Simulate loading time for smooth entrance
@@ -307,31 +325,22 @@ const EnhancedPortfolio = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  if (!mounted || isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <motion.div
-          className="flex flex-col items-center gap-4"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.div
-            className="w-20 h-20 border-4 border-purple-400 border-t-transparent rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.p
-            className="text-white/80 text-lg font-medium"
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
-            Loading worms...
-          </motion.p>
-        </motion.div>
-      </div>
-    );
-  }
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (selectedPiece) setSelectedPiece(null);
+        if (showAbout) setShowAbout(false);
+      }
+      if (e.key === ' ' && !selectedPiece && !showAbout) {
+        e.preventDefault();
+        handlePlayPause();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedPiece, showAbout, isMoving]);
 
   const backgrounds = {
     day: 'bg-gradient-to-br from-slate-50 to-gray-100',
@@ -351,36 +360,6 @@ const EnhancedPortfolio = () => {
         return backgrounds.day;
     }
   };
-
-  // Memoize initial positions to prevent recalculation on re-renders
-  const initialPositions = useMemo(() => {
-    const windowWidth = typeof window !== 'undefined' ? window.innerWidth : 1000;
-    const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 1000;
-    const margin = windowWidth < 768 ? 60 : 120;
-
-    return artworks.map(() => ({
-      x: margin + Math.random() * (windowWidth - margin * 2),
-      y: margin + Math.random() * (windowHeight - margin * 2),
-      rotate: Math.random() * 360
-    }));
-  }, []);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (selectedPiece) setSelectedPiece(null);
-        if (showAbout) setShowAbout(false);
-      }
-      if (e.key === ' ' && !selectedPiece && !showAbout) {
-        e.preventDefault();
-        handlePlayPause();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedPiece, showAbout, isMoving]);
 
   const getLineStyles = (category: string) => {
     switch (category) {
@@ -446,11 +425,6 @@ const EnhancedPortfolio = () => {
     setActiveCategory(categories[nextIndex].id);
   };
 
-  const filteredArtworks = useMemo(() => {
-    if (activeCategory === 'all') return artworks;
-    return artworks.filter(piece => piece.category === activeCategory);
-  }, [activeCategory]);
-
   const handlePlayPause = () => {
     if (!isMoving) {
       // Starting movement
@@ -466,6 +440,33 @@ const EnhancedPortfolio = () => {
       setShouldShuffle(false);
     }
   };
+
+  // Loading state - shown after all hooks are called
+  if (!mounted || isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+        <motion.div
+          className="flex flex-col items-center gap-4"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div
+            className="w-20 h-20 border-4 border-purple-400 border-t-transparent rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.p
+            className="text-white/80 text-lg font-medium"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            Loading worms...
+          </motion.p>
+        </motion.div>
+      </div>
+    );
+  }
 
   const currentCategoryInfo = categories.find(cat => cat.id === activeCategory);
 
